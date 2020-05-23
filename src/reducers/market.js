@@ -1,6 +1,6 @@
-import {MARKER_SUCCESS, MARKET_SUCCESS} from '../config'
+import {MARKET_SUCCESS} from '../config'
 const initalState = {
-   market:[]
+   market:null
 
 }
 
@@ -10,7 +10,8 @@ export default function market (state=initalState,action){
     switch(type){
         case MARKET_SUCCESS:
         return{
-            ...state,market:payload
+            ...state,
+            market:payload
         };
         default:
         return state;

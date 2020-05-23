@@ -2,10 +2,11 @@ import React,{useState,useCallback} from  'react'
 import{useDispatch,useSelector} from 'react-redux'
 import {searchMarket} from '../actions/market'
 import Geocode from "react-geocode";
-Geocode.setApiKey("AIzaSyBK4hX4LTjsPB4E8-XYBt3HFcOqzRGKb4Q");
+Geocode.setApiKey(process.env.REACT_APP_API_KEY);
+
 function Market(){
     const dispatch = useDispatch();
-    const markets = useSelector((state)=>(state.market))
+    const markets = useSelector((state)=>(state.market.market))
     console.log(markets)
     const [market,setMarket] = useState({
         name:null,
@@ -97,7 +98,7 @@ function Market(){
                          name="address"
                          className="form-control"
                          
-                         onChange={(e)=>e.target.value !='' ? getLocation(e):''} 
+                         onChange={(e)=>e.target.value !=='' ? getLocation(e):''} 
                          id="" placeholder="Address"/>
                     </div>
                     <div className="checkbox">
@@ -110,6 +111,37 @@ function Market(){
                     <button type="submit" onClick={(e)=>handleSubmit(e)}  className="btn btn-default">Search</button>
                 </form>
             </div>
+            {/* {markets.map(n=>{
+             return(
+                <p>{n}</p>
+             )
+         })}  */}
+         {
+            markets !==null ? markets.map(market=>{
+                return(
+                    <div>
+                    <p key={market.name}>{market.name}</p>
+                    {market.image.map(tee =>{
+                        return(
+                            <div>
+                           
+                            <p>image:<img src={`data:image/jpeg;base64,${tee}`} alt="img" style={{width:42}} className="rounded-circle" /> </p>
+                            </div>
+                        )
+                    })}
+                    </div>
+                )
+            }) : ''
+         
+        }
+             
+                  {/* markets != null ? {markets.map(market=>{
+                      return(
+                         <p>{market.name}</p>
+                      )
+                  })} : ''  */}
+            
+           
       </div>
     )
 }
