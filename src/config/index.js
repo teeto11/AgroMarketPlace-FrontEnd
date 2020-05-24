@@ -1,1 +1,2 @@
 export const MARKET_SUCCESS = 'MARKET_SUCCESS'
+export const RESULT_EMPTY ='RESULT_EMPTY'
