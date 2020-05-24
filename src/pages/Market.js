@@ -32,7 +32,6 @@ function Market(){
     const showPosition = () => {
            if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                console.log(position.coords.latitude)
                 setMarket({
                     ...market,
                     latitude:position.coords.latitude,
@@ -58,8 +57,6 @@ function Market(){
         async () => {
             let address = [];
             const myMarkets = markets.market;
-            console.log("market.market",markets.market)
-            console.log('mu market', myMarkets);
             if (Array.isArray(myMarkets)){
                 for(let market of myMarkets)
                     {
@@ -67,8 +64,6 @@ function Market(){
                         let address1 =  await Geocode.fromLatLng(`${latitude}`, `${longitude}`)
                         let githubUser = await address1;
                         address.push(githubUser.results[0].formatted_address);
-                        console.log('indide address', address)
-                        console.log('other', address1.results[0].formatted_address)
                     }
                     setAdd(address);
             }
