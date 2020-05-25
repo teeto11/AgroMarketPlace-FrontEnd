@@ -62,14 +62,14 @@ function Market(){
                     {
                         const [latitude, longitude] = market.address;
                         let address1 =  await Geocode.fromLatLng(`${latitude}`, `${longitude}`)
-                        let githubUser = await address1;
-                        address.push(githubUser.results[0].formatted_address);
+                        let theaddress = await address1;
+                        address.push(theaddress.results[0].formatted_address);
                     }
                     setAdd(address);
             }
         }     
      ,[markets.market])  
-     console.log('add2', add);
+    // console.log('add2', add);
    useEffect(()=>{
        convert()
    },[markets.market])
@@ -109,7 +109,7 @@ function Market(){
                         <label>
                         <input type="checkbox"
                         onClick={()=>showPosition()}
-                        />click to use location
+                        />click to use present location
                         </label>
                     </div>
                     <button type="submit" onClick={(e)=>handleSubmit(e)}  className="btn btn-default">Search</button>
@@ -135,13 +135,16 @@ function Market(){
                                      <label>{add[index]}</label>
                                 </li>
                                 <li>
-                                    {result.image.map(tee =>{
+                                    { 
+                                    result.image.length !== 0 ? result.image.map(tee =>{
                                         return(
                                             <div key={tee}> 
                                                 <p>image:<img src={`data:image/jpeg;base64,${tee}`} alt="img" style={{width:42}} className="rounded-circle" /> </p>
                                             </div>
                                     )
-                                })}
+                                }) : ''
+                                    
+                                    }
                             </li>
                            </ol>
                         </div>
